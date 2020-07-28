@@ -9,7 +9,15 @@ namespace Atividade_VI.Entities
         public Product(){
         }
 
-        
+        public Product(string name, int code, int quantity){
+            Name = name;
+            Code = code;
+            Quantity = quantity;
+        }
+
+        public override string ToString(){
+            return "Code: " + Code + " | " + "Name: " + Name + " | " + "Quantity: " + Quantity;
+        }
 
     }
 }

@@ -1,0 +1,13 @@
+/home/glauber/Documentos/Projetos_C#/Exs_OO/Atividade_VI/bin/Debug/netcoreapp3.1/Atividade_VI
+/home/glauber/Documentos/Projetos_C#/Exs_OO/Atividade_VI/bin/Debug/netcoreapp3.1/Atividade_VI.deps.json
+/home/glauber/Documentos/Projetos_C#/Exs_OO/Atividade_VI/bin/Debug/netcoreapp3.1/Atividade_VI.runtimeconfig.json
+/home/glauber/Documentos/Projetos_C#/Exs_OO/Atividade_VI/bin/Debug/netcoreapp3.1/Atividade_VI.runtimeconfig.dev.json
+/home/glauber/Documentos/Projetos_C#/Exs_OO/Atividade_VI/bin/Debug/netcoreapp3.1/Atividade_VI.dll
+/home/glauber/Documentos/Projetos_C#/Exs_OO/Atividade_VI/bin/Debug/netcoreapp3.1/Atividade_VI.pdb
+/home/glauber/Documentos/Projetos_C#/Exs_OO/Atividade_VI/obj/Debug/netcoreapp3.1/Atividade_VI.csprojAssemblyReference.cache
+/home/glauber/Documentos/Projetos_C#/Exs_OO/Atividade_VI/obj/Debug/netcoreapp3.1/Atividade_VI.AssemblyInfoInputs.cache
+/home/glauber/Documentos/Projetos_C#/Exs_OO/Atividade_VI/obj/Debug/netcoreapp3.1/Atividade_VI.AssemblyInfo.cs
+/home/glauber/Documentos/Projetos_C#/Exs_OO/Atividade_VI/obj/Debug/netcoreapp3.1/Atividade_VI.csproj.CoreCompileInputs.cache
+/home/glauber/Documentos/Projetos_C#/Exs_OO/Atividade_VI/obj/Debug/netcoreapp3.1/Atividade_VI.dll
+/home/glauber/Documentos/Projetos_C#/Exs_OO/Atividade_VI/obj/Debug/netcoreapp3.1/Atividade_VI.pdb
+/home/glauber/Documentos/Projetos_C#/Exs_OO/Atividade_VI/obj/Debug/netcoreapp3.1/Atividade_VI.genruntimeconfig.cache
