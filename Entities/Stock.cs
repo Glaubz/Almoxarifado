@@ -14,7 +14,7 @@ namespace Atividade_VI.Entities
             foreach(Product prod in products){
                 if(product == prod){
                     alreadyExist = true;
-                    throw new StockException("The product already exists");
+                    throw new StockException("\n! - The product already exists\n");
                     //break;
                 }
             }
@@ -22,7 +22,7 @@ namespace Atividade_VI.Entities
         }
 
         public void editProduct(string nameOrCode){ //For savety the Quantity attribute is not editable, this attribute only change in case of add or remove a product
-            if(products == null) throw new StockException("The stock is empty");
+            if(products.Count == 0) throw new StockException("\n! - The stock is empty\n");
             foreach(Product product in products){
                 if(nameOrCode == product.Name || int.Parse(nameOrCode) == product.Code){
                     System.Console.Write("Insert a new name: ");
@@ -32,13 +32,13 @@ namespace Atividade_VI.Entities
                     break;
                 }
                 else{
-                    throw new StockException("The informed name or code doesn't exist in the list\n");
+                    throw new StockException("\n! - The informed name or code doesn't exist in the list\n");
                 }
             }
         }
 
         public void deleteProduct(string nameOrCode){
-            if(products.Count == 0) throw new StockException("The stock is empty");
+            if(products.Count == 0) throw new StockException("\n ! - The stock is empty\n");
             foreach(Product product in products){
                 if(nameOrCode == product.Name || int.Parse(nameOrCode) == product.Code){
                     products.Remove(product);

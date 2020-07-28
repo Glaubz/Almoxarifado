@@ -9,33 +9,45 @@ namespace Atividade_VI
         {
             Stock stock = new Stock();
 
-            Console.WriteLine("STOCK");
-            System.Console.Write("\n1 - Add a product\n2 - Delete a product\n3 - Edit a product\n4 - Stock list\n0 - Exit\n\nChoose an option: ");
-            int option = int.Parse(Console.ReadLine());
+            bool loop = true;
 
-            try{
-                switch(option){
-                    case 1:
-                        Product product = productData();
-                        stock.addProduct(product);
-                        break;
-                    case 2:
-                        Console.Write("To delete a product insert a name or a code: ");
-                        string nameOrCode = Console.ReadLine();
-                        stock.deleteProduct(nameOrCode);
-                        break;
-                    case 3:
-                        Console.Write("To edit a product insert a name or a code: ");
-                        nameOrCode = Console.ReadLine();
-                        stock.editProduct(nameOrCode);
-                        break;
-                    default:
-                        System.Console.WriteLine("Insert a valid option!\n");
-                        break;
+            while(loop == true){
+
+                Console.WriteLine("STOCK MENU");
+                System.Console.Write("\n1 - Add a product\n2 - Delete a product\n3 - Edit a product\n4 - Stock list\n0 - Exit\n\nChoose an option: ");
+                int option = int.Parse(Console.ReadLine());
+                //Lembrar de colocar um tratamento caso não seja colocado um numero como opção
+
+                try{
+                    switch(option){
+                        case 1:
+                            Product product = productData();
+                            stock.addProduct(product);
+                            break;
+                        case 2:
+                            Console.Write("To delete a product insert a name or a code: ");
+                            string nameOrCode = Console.ReadLine();
+                            stock.deleteProduct(nameOrCode);
+                            break;
+                        case 3:
+                            Console.Write("To edit a product insert a name or a code: ");
+                            nameOrCode = Console.ReadLine();
+                            stock.editProduct(nameOrCode);
+                            break;
+                        case 0:
+                            loop = false;
+                            break;
+                        default:
+                            throw new StockException("\n! - Insert a valid option!\n");
+                    }
                 }
-            }
-            catch(Exception m){
-                Console.WriteLine(m.Message);
+                catch(Exception m){
+                    Console.WriteLine(m.Message);
+                }
+
+                Console.Write("Press key to continue...");
+                if(loop == true) Console.ReadKey();
+                Console.Clear(); //Limpar menu anterior
             }
 
         }
