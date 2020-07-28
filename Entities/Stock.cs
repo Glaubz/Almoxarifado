@@ -21,14 +21,16 @@ namespace Atividade_VI.Entities
             if(!alreadyExist) products.Add(product);
         }
 
-        public void editProduct(string nameOrCode){ //For savety the Quantity attribute is not editable, this attribute only change in case of add or remove a product
+        public void editProduct(){ //For savety the Quantity attribute is not editable, this attribute only change in case of add or remove a product
             if(products.Count == 0) throw new StockException("\n! - The stock is empty\n");
+            string nameOrCode = this.nameOrCode();
             foreach(Product product in products){
                 if(nameOrCode == product.Name || int.Parse(nameOrCode) == product.Code){
                     System.Console.Write("Insert a new name: ");
                     product.Name = System.Console.ReadLine();
                     System.Console.Write("Insert a new code: ");
                     product.Code = int.Parse(System.Console.ReadLine());
+                    System.Console.WriteLine($"\nProduct {product.Name}, Code {product.Code} edited");
                     break;
                 }
                 else{
@@ -37,11 +39,13 @@ namespace Atividade_VI.Entities
             }
         }
 
-        public void deleteProduct(string nameOrCode){
+        public void deleteProduct(){
             if(products.Count == 0) throw new StockException("\n ! - The stock is empty\n");
+            string nameOrCode = this.nameOrCode();
             foreach(Product product in products){
                 if(nameOrCode == product.Name || int.Parse(nameOrCode) == product.Code){
                     products.Remove(product);
+                    System.Console.WriteLine($"\nProduct {product.Name}, Code {product.Code} removed");
                     break;
                 }
                 else{
@@ -50,7 +54,11 @@ namespace Atividade_VI.Entities
             }
         }
 
-        
+        public string nameOrCode(){
+            System.Console.Write("\nInsert a name or a code: ");
+            string nameOrCode = System.Console.ReadLine();
+            return nameOrCode;
+        }        
 
     }
 }

@@ -25,14 +25,10 @@ namespace Atividade_VI
                             stock.addProduct(product);
                             break;
                         case 2:
-                            Console.Write("To delete a product insert a name or a code: ");
-                            string nameOrCode = Console.ReadLine();
-                            stock.deleteProduct(nameOrCode);
+                            stock.deleteProduct();
                             break;
                         case 3:
-                            Console.Write("To edit a product insert a name or a code: ");
-                            nameOrCode = Console.ReadLine();
-                            stock.editProduct(nameOrCode);
+                            stock.editProduct();
                             break;
                         case 0:
                             loop = false;
@@ -48,6 +44,7 @@ namespace Atividade_VI
                 Console.Write("Press key to continue...");
                 if(loop == true) Console.ReadKey();
                 Console.Clear(); //Limpar menu anterior
+
             }
 
         }
