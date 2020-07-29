@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 
 namespace Atividade_VI.Entities
 {
@@ -26,11 +27,13 @@ namespace Atividade_VI.Entities
             string nameOrCode = this.nameOrCode();
             foreach(Product product in products){
                 if(nameOrCode == product.Name || int.Parse(nameOrCode) == product.Code){
-                    System.Console.Write("Insert a new name: ");
+                    string name = product.Name; //string to storage the old name of the product
+                    System.Console.Write("\nInsert a new name: ");
                     product.Name = System.Console.ReadLine();
+                    int code = product.Code; //string to storage the old name of the product
                     System.Console.Write("Insert a new code: ");
                     product.Code = int.Parse(System.Console.ReadLine());
-                    System.Console.WriteLine($"\nProduct {product.Name}, Code {product.Code} edited");
+                    System.Console.WriteLine($"\nName: {name}, Code: {code} edited to Name: {product.Name},  Code: {product.Code}\n");
                     break;
                 }
                 else{
@@ -55,10 +58,19 @@ namespace Atividade_VI.Entities
         }
 
         public string nameOrCode(){
-            System.Console.Write("\nInsert a name or a code: ");
+            System.Console.Write("\nInsert a name or code: ");
             string nameOrCode = System.Console.ReadLine();
             return nameOrCode;
-        }        
+        }
+
+        public void relatory(){
+            StringBuilder sb = new StringBuilder("CODE | NAME | QUANTITY\n");
+            
+            foreach(Product prod in products){
+                sb.AppendLine(prod.ToString()); //Put a ToString to receive the ToString text defined in the Product class
+            }
+            System.Console.WriteLine(sb.ToString());
+        }
 
     }
 }

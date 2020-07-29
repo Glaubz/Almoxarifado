@@ -30,6 +30,9 @@ namespace Atividade_VI
                         case 3:
                             stock.editProduct();
                             break;
+                        case 4:
+                            stock.relatory();
+                            break;
                         case 0:
                             loop = false;
                             break;
@@ -41,9 +44,16 @@ namespace Atividade_VI
                     Console.WriteLine(m.Message);
                 }
 
+                //End of loop treatement
                 Console.Write("Press key to continue...");
-                if(loop == true) Console.ReadKey();
-                Console.Clear(); //Limpar menu anterior
+                if(loop == true){
+                    Console.ReadKey(); //Case continue press key
+                    Console.Clear();
+                }
+                else{
+                    Console.Clear();
+                    Console.WriteLine("Goodbye o/"); //Case exit, goodbye messenge
+                }
 
             }
 
