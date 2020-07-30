@@ -23,18 +23,23 @@ namespace Atividade_VI.Entities
             if(!alreadyExist) products.Add(product);
         }
 
-        public void editProduct(){ //For savety the Quantity attribute is not editable, this attribute only change in case of add or remove a product
+        public void editProduct(){
             if(products.Count == 0) throw new StockException("\n! - The stock is empty\n");
             string nameOrCode = this.nameOrCode();
             foreach(Product product in products){
                 if(nameOrCode == product.Name || int.Parse(nameOrCode) == product.Code){
+                    
                     string name = product.Name; //string to storage the old name of the product
                     System.Console.Write("\nInsert a new name: ");
                     product.Name = System.Console.ReadLine();
                     int code = product.Code; //string to storage the old name of the product
                     System.Console.Write("Insert a new code: ");
                     product.Code = int.Parse(System.Console.ReadLine());
-                    System.Console.WriteLine($"\nName: {name}, Code: {code} edited to Name: {product.Name},  Code: {product.Code}\n");
+                    int quantity = product.Quantity; //storage old number of quantity
+                    System.Console.WriteLine("Insert the updated quantity: ");
+                    product.Quantity = int.Parse(System.Console.ReadLine());
+                    
+                    System.Console.WriteLine($"\nName: {name}, Code: {code}, Quantity: {quantity} edited to Name: {product.Name}, Code: {product.Code}\n, Quantity: {product.Quantity}");
                     break;
                 }
                 else{
