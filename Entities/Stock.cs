@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using System.Linq; //Linq library to order the relatory in alphabetic order
 
 namespace Atividade_VI.Entities
 {
@@ -64,9 +65,9 @@ namespace Atividade_VI.Entities
         }
 
         public void relatory(){
-            StringBuilder sb = new StringBuilder("CODE | NAME | QUANTITY\n");
-            
-            foreach(Product prod in products){
+            StringBuilder sb = new StringBuilder("\nCODE | NAME | QUANTITY\n");
+            var products2 = products.OrderBy(x => x.Name); //Used method of Linq library to order the relatory with help of Lambda
+            foreach(Product prod in products2){
                 sb.AppendLine(prod.ToString()); //Put a ToString to receive the ToString text defined in the Product class
             }
             System.Console.WriteLine(sb.ToString());
