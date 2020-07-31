@@ -13,12 +13,12 @@ namespace Atividade_VI
 
             while(loop == true){
 
-                Console.WriteLine("STOCK MENU");
-                System.Console.Write("\n1 - Add a product\n2 - Delete a product\n3 - Edit a product\n4 - Stock list\n0 - Exit\n\nChoose an option: ");
-                int option = int.Parse(Console.ReadLine());
-                //Lembrar de colocar um tratamento caso não seja colocado um numero como opção
-
                 try{
+                    Console.WriteLine("STOCK MENU");
+                    System.Console.Write("\n1 - Add a product\n2 - Delete a product\n3 - Edit a product\n4 - Stock list\n0 - Exit\n\nChoose an option: ");
+                    int option = int.Parse(Console.ReadLine());
+                    //Lembrar de colocar um tratamento caso não seja colocado um numero como opção
+                
                     switch(option){
                         case 1:
                             Product product = productData();

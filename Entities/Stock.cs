@@ -26,9 +26,10 @@ namespace Atividade_VI.Entities
         public void editProduct(){
             if(products.Count == 0) throw new StockException("\n! - The stock is empty\n");
             string nameOrCode = this.nameOrCode();
+            bool exist = false;
             foreach(Product product in products){
                 if(nameOrCode == product.Name || int.Parse(nameOrCode) == product.Code){
-                    
+                    exist = true;
                     string name = product.Name; //string to storage the old name of the product
                     System.Console.Write("\nInsert a new name: ");
                     product.Name = System.Console.ReadLine();
@@ -36,31 +37,29 @@ namespace Atividade_VI.Entities
                     System.Console.Write("Insert a new code: ");
                     product.Code = int.Parse(System.Console.ReadLine());
                     int quantity = product.Quantity; //storage old number of quantity
-                    System.Console.WriteLine("Insert the updated quantity: ");
+                    System.Console.Write("Insert the updated quantity: ");
                     product.Quantity = int.Parse(System.Console.ReadLine());
                     
-                    System.Console.WriteLine($"\nName: {name}, Code: {code}, Quantity: {quantity} edited to Name: {product.Name}, Code: {product.Code}\n, Quantity: {product.Quantity}");
+                    System.Console.WriteLine($"\nName: {name}, Code: {code}, Quantity: {quantity} edited to Name: {product.Name}, Code: {product.Code}, Quantity: {product.Quantity}");
                     break;
                 }
-                else{
-                    throw new StockException("\n! - The informed name or code doesn't exist in the list\n");
-                }
             }
+            if(exist == false) throw new StockException("! - Not exist a product with this information");
         }
 
         public void deleteProduct(){
-            if(products.Count == 0) throw new StockException("\n ! - The stock is empty\n");
+            if(products.Count == 0) throw new StockException("\n! - The stock is empty\n");
             string nameOrCode = this.nameOrCode();
+            bool exist = false;
             foreach(Product product in products){
                 if(nameOrCode == product.Name || int.Parse(nameOrCode) == product.Code){
                     products.Remove(product);
                     System.Console.WriteLine($"\nProduct {product.Name}, Code {product.Code} removed");
+                    exist = true;
                     break;
                 }
-                else{
-                    throw new StockException("The informed name or code doesn't exist in the list\n");
-                }
             }
+            if(exist == false) throw new StockException("\n! - Not exist a product with this information");
         }
 
         public string nameOrCode(){
