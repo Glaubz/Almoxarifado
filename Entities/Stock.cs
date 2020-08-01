@@ -11,6 +11,10 @@ namespace Atividade_VI.Entities
         public Stock(){
         }
 
+        public Stock(List<Product> products){
+            this.products = products;
+        }
+
         public void addProduct(Product product){ //The method verify if the product already exists, if not the product is adding to the list of products
             bool alreadyExist = false;
             foreach(Product prod in products){
@@ -40,7 +44,7 @@ namespace Atividade_VI.Entities
                     System.Console.Write("Insert the updated quantity: ");
                     product.Quantity = int.Parse(System.Console.ReadLine());
                     
-                    System.Console.WriteLine($"\nName: {name}, Code: {code}, Quantity: {quantity} edited to Name: {product.Name}, Code: {product.Code}, Quantity: {product.Quantity}");
+                    System.Console.WriteLine($"\nName: {name}, Code: {code}, Quantity: {quantity} => edited to => Name: {product.Name}, Code: {product.Code}, Quantity: {product.Quantity}");
                     break;
                 }
             }
@@ -70,13 +74,16 @@ namespace Atividade_VI.Entities
 
         public void relatory(){
             isEmpty();
-            StringBuilder sb = new StringBuilder("\nSTOCK LIST\n");
+            StringBuilder sb = new StringBuilder("\nSTOCK LIST\n\n");
             var products2 = products.OrderBy(x => x.Name); //Used method of Linq library to order the relatory with help of Lambda
+            int quantTotal = 0;
             foreach(Product prod in products2){
                 sb.AppendLine(prod.ToString()); //Put a ToString to receive the ToString text defined in the Product class
                 sb.AppendLine();
+                quantTotal += prod.Quantity;
             }
-            System.Console.Write(sb.ToString());
+            sb.Append("Total amount of products: " + quantTotal);
+            System.Console.WriteLine(sb.ToString());
         }
 
         public void isEmpty(){ //Method to verify if exist product is the stock

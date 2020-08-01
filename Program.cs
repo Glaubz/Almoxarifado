@@ -1,5 +1,7 @@
 ﻿using System;
 using Atividade_VI.Entities;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Atividade_VI
 {
@@ -7,7 +9,8 @@ namespace Atividade_VI
     {
         static void Main(string[] args)
         {
-            Stock stock = new Stock();
+            List<Product> products = listUp();
+            Stock stock = new Stock(products);
 
             bool loop = true;
 
@@ -56,7 +59,6 @@ namespace Atividade_VI
                 }
 
             }
-
         }
 
         static Product productData() //Function to receive product informations and return a product
@@ -70,6 +72,25 @@ namespace Atividade_VI
             int quantity = int.Parse(Console.ReadLine());
             Product product = new Product(name, code, quantity);
             return product;
+        }
+
+        static List<Product> listUp(){
+            string origin = "BD_Products";
+            List<Product> products = new List<Product>();
+            StreamReader sr = new StreamReader(origin);
+            
+            string line;
+            while((line = sr.ReadLine()) != null){
+                string[] infos = line.Split(";");
+                int code = int.Parse(infos[0]);
+                string name = infos[1];
+                int quantity = int.Parse(infos[2]);
+
+                Product product = new Product(name, code, quantity);
+                products.Add(product);
+            }
+
+            return products;
         }
 
     }
