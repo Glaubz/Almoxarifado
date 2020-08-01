@@ -24,7 +24,7 @@ namespace Atividade_VI.Entities
         }
 
         public void editProduct(){
-            if(products.Count == 0) throw new StockException("\n! - The stock is empty\n");
+            isEmpty();
             string nameOrCode = this.nameOrCode();
             bool exist = false;
             foreach(Product product in products){
@@ -48,7 +48,7 @@ namespace Atividade_VI.Entities
         }
 
         public void deleteProduct(){
-            if(products.Count == 0) throw new StockException("\n! - The stock is empty\n");
+            isEmpty();
             string nameOrCode = this.nameOrCode();
             bool exist = false;
             foreach(Product product in products){
@@ -69,12 +69,18 @@ namespace Atividade_VI.Entities
         }
 
         public void relatory(){
-            StringBuilder sb = new StringBuilder("\nCODE | NAME | QUANTITY\n");
+            isEmpty();
+            StringBuilder sb = new StringBuilder("\nSTOCK LIST\n");
             var products2 = products.OrderBy(x => x.Name); //Used method of Linq library to order the relatory with help of Lambda
             foreach(Product prod in products2){
                 sb.AppendLine(prod.ToString()); //Put a ToString to receive the ToString text defined in the Product class
+                sb.AppendLine();
             }
-            System.Console.WriteLine(sb.ToString());
+            System.Console.Write(sb.ToString());
+        }
+
+        public void isEmpty(){ //Method to verify if exist product is the stock
+            if(products.Count == 0) throw new StockException("! - The stock is empty");
         }
 
     }

@@ -41,11 +41,11 @@ namespace Atividade_VI
                     }
                 }
                 catch(Exception m){
-                    Console.WriteLine(m.Message);
+                    Console.WriteLine("\n" + m.Message);
                 }
 
                 //End of loop treatement
-                Console.Write("Press key to continue...");
+                Console.Write("\nPress key to continue...");
                 if(loop == true){
                     Console.ReadKey(); //Case continue press key
                     Console.Clear();

@@ -16,7 +16,7 @@ namespace Atividade_VI.Entities
         }
 
         public override string ToString(){
-            return "Code: " + Code + " | " + "Name: " + Name + " | " + "Quantity: " + Quantity;
+            return "Name: " + Name + "\n" + "Code: " + Code + "\n" + "Quantity: " + Quantity;
         }
 
     }
