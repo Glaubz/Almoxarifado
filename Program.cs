@@ -67,7 +67,7 @@ namespace Atividade_VI
             Console.Write("Name: ");
             string name = Console.ReadLine();
             Console.Write("Code: ");
-            int code = int.Parse(Console.ReadLine());
+            string code = Console.ReadLine();
             Console.Write("Quantity: ");
             int quantity = int.Parse(Console.ReadLine());
             Product product = new Product(name, code, quantity);
@@ -75,21 +75,24 @@ namespace Atividade_VI
         }
 
         static List<Product> listUp(){
-            string origin = "BD_Products";
             List<Product> products = new List<Product>();
-            StreamReader sr = new StreamReader(origin);
-            
-            string line;
-            while((line = sr.ReadLine()) != null){
-                string[] infos = line.Split(";");
-                int code = int.Parse(infos[0]);
-                string name = infos[1];
-                int quantity = int.Parse(infos[2]);
+            if(File.Exists("BD_Products")){
+                string origin = "BD_Products";
+                
+                using(StreamReader sr = new StreamReader(origin)){
+                    string line;
+                    while((line = sr.ReadLine()) != null){
+                        string[] infos = line.Split(";");
+                        string code = infos[0];
+                        string name = infos[1];
+                        int quantity = int.Parse(infos[2]);
 
-                Product product = new Product(name, code, quantity);
-                products.Add(product);
+                        Product product = new Product(name, code, quantity);
+                        products.Add(product);
+                    }
+                }
+                return products;
             }
-
             return products;
         }
 

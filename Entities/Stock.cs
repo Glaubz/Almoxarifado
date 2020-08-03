@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq; //Linq library to order the relatory in alphabetic order
+using System.IO;
 
 namespace Atividade_VI.Entities
 {
@@ -18,13 +19,22 @@ namespace Atividade_VI.Entities
         public void addProduct(Product product){ //The method verify if the product already exists, if not the product is adding to the list of products
             bool alreadyExist = false;
             foreach(Product prod in products){
-                if(product == prod){
+                if(product.Name == prod.Name){
                     alreadyExist = true;
-                    throw new StockException("\n! - The product already exists\n");
-                    //break;
+                    throw new StockException("! - Already exists a product with this name");
+                }
+                else if(product.Code == prod.Code){
+                    alreadyExist = true;
+                    throw new StockException("! - Already exists a product with this code");
                 }
             }
             if(!alreadyExist) products.Add(product);
+
+            //The next lines include more products in the text archive
+            FileInfo fi = new FileInfo("BD_Products");
+            using(StreamWriter sw = fi.AppendText()){
+                sw.WriteLine(product.formatString());
+            }
         }
 
         public void editProduct(){
@@ -32,14 +42,15 @@ namespace Atividade_VI.Entities
             string nameOrCode = this.nameOrCode();
             bool exist = false;
             foreach(Product product in products){
-                if(nameOrCode == product.Name || int.Parse(nameOrCode) == product.Code){
+                if(nameOrCode == product.Name || nameOrCode == product.Code){
                     exist = true;
+                    System.Console.Write($"\nProduct in edition\nName: {product.Name}\nCode: {product.Code}\nQuantity: {product.Quantity}\n");
                     string name = product.Name; //string to storage the old name of the product
                     System.Console.Write("\nInsert a new name: ");
                     product.Name = System.Console.ReadLine();
-                    int code = product.Code; //string to storage the old name of the product
+                    string code = product.Code; //string to storage the old name of the product
                     System.Console.Write("Insert a new code: ");
-                    product.Code = int.Parse(System.Console.ReadLine());
+                    product.Code = System.Console.ReadLine();
                     int quantity = product.Quantity; //storage old number of quantity
                     System.Console.Write("Insert the updated quantity: ");
                     product.Quantity = int.Parse(System.Console.ReadLine());
@@ -56,7 +67,7 @@ namespace Atividade_VI.Entities
             string nameOrCode = this.nameOrCode();
             bool exist = false;
             foreach(Product product in products){
-                if(nameOrCode == product.Name || int.Parse(nameOrCode) == product.Code){
+                if(nameOrCode == product.Name || nameOrCode == product.Code){
                     products.Remove(product);
                     System.Console.WriteLine($"\nProduct {product.Name}, Code {product.Code} removed");
                     exist = true;
