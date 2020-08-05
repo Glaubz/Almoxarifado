@@ -78,24 +78,25 @@ namespace Atividade_VI.Entities
             isEmpty();
             string nameOrCode = this.nameOrCode();
             bool exist = false;
-            using(StreamReader archive = new StreamReader("BD_Products")){
+            //using(StreamReader archive = new StreamReader("BD_Products")){
                 StringBuilder text = new StringBuilder();
+                string[] archive = File.ReadAllLines("BD_Products");
+                int i = 0;
                 foreach(Product product in products){
-                    string line = archive.ReadLine();
                     if(nameOrCode == product.Name || nameOrCode == product.Code){
                         products.Remove(product);
                         System.Console.WriteLine($"\nProduct {product.Name}, Code {product.Code} removed");
                         exist = true;
+                        break;
                     }
-                    else{
-                        text.AppendLine(line);
-                    }
+                    i++;
                 }
                 if(exist == false) throw new StockException("! - Not exist a product with this information");
                 using(StreamWriter newArchive = new StreamWriter("BD_Products")){
-                    newArchive.Write(text);
+                    for(int j=0; j<archive.Length; j++)
+                    if(j != i) newArchive.WriteLine(archive[j]);
                 }
-            }
+            //}
         }
 
         public string nameOrCode(){
