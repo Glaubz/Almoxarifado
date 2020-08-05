@@ -40,7 +40,7 @@ namespace Atividade_VI
                             loop = false;
                             break;
                         default:
-                            throw new StockException("\n! - Insert a valid option!\n");
+                            throw new StockException("! - Insert a valid option!");
                     }
                 }
                 catch(Exception m){
@@ -78,7 +78,6 @@ namespace Atividade_VI
             List<Product> products = new List<Product>();
             if(File.Exists("BD_Products")){
                 string origin = "BD_Products";
-                
                 using(StreamReader sr = new StreamReader(origin)){
                     string line;
                     while((line = sr.ReadLine()) != null){

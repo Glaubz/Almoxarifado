@@ -41,40 +41,61 @@ namespace Atividade_VI.Entities
             isEmpty();
             string nameOrCode = this.nameOrCode();
             bool exist = false;
-            foreach(Product product in products){
-                if(nameOrCode == product.Name || nameOrCode == product.Code){
-                    exist = true;
-                    System.Console.Write($"\nProduct in edition\nName: {product.Name}\nCode: {product.Code}\nQuantity: {product.Quantity}\n");
-                    string name = product.Name; //string to storage the old name of the product
-                    System.Console.Write("\nInsert a new name: ");
-                    product.Name = System.Console.ReadLine();
-                    string code = product.Code; //string to storage the old name of the product
-                    System.Console.Write("Insert a new code: ");
-                    product.Code = System.Console.ReadLine();
-                    int quantity = product.Quantity; //storage old number of quantity
-                    System.Console.Write("Insert the updated quantity: ");
-                    product.Quantity = int.Parse(System.Console.ReadLine());
-                    
-                    System.Console.WriteLine($"\nName: {name}, Code: {code}, Quantity: {quantity} => edited to => Name: {product.Name}, Code: {product.Code}, Quantity: {product.Quantity}");
-                    break;
+            using(StreamReader archive = new StreamReader("BD_Products")){
+                StringBuilder text = new StringBuilder(); //StringBuilder to receive the new text to put in the archive
+                foreach(Product product in products){
+                    string line = archive.ReadLine();
+                    if(nameOrCode == product.Name || nameOrCode == product.Code){
+                        exist = true;
+                        System.Console.Write($"\nProduct in edition\nName: {product.Name}\nCode: {product.Code}\nQuantity: {product.Quantity}\n");
+                        string name = product.Name; //string to storage the old name of the product
+                        System.Console.Write("\nInsert a new name: ");
+                        product.Name = System.Console.ReadLine();
+                        string code = product.Code; //string to storage the old name of the product
+                        System.Console.Write("Insert a new code: ");
+                        product.Code = System.Console.ReadLine();
+                        int quantity = product.Quantity; //storage old number of quantity
+                        System.Console.Write("Insert the updated quantity: ");
+                        product.Quantity = int.Parse(System.Console.ReadLine());
+                        
+                        //Replacing the old attributes with the new informations
+                        line = line.Replace(code, product.Code);
+                        line = line.Replace(name, product.Name);
+                        line = line.Replace(quantity.ToString(), product.Quantity.ToString());
+
+                        System.Console.WriteLine($"\nName: {name}, Code: {code}, Quantity: {quantity} => edited to => Name: {product.Name}, Code: {product.Code}, Quantity: {product.Quantity}");
+                    }
+                    text.AppendLine(line); //Adding lines in the text
+                }
+                if(exist == false) throw new StockException("! - Not exist a product with this information");
+                using(StreamWriter newArchive = new StreamWriter("BD_Products")){
+                    newArchive.Write(text); //Rewriting the archive with the new text
                 }
             }
-            if(exist == false) throw new StockException("! - Not exist a product with this information");
         }
 
         public void deleteProduct(){
             isEmpty();
             string nameOrCode = this.nameOrCode();
             bool exist = false;
-            foreach(Product product in products){
-                if(nameOrCode == product.Name || nameOrCode == product.Code){
-                    products.Remove(product);
-                    System.Console.WriteLine($"\nProduct {product.Name}, Code {product.Code} removed");
-                    exist = true;
-                    break;
+            using(StreamReader archive = new StreamReader("BD_Products")){
+                StringBuilder text = new StringBuilder();
+                foreach(Product product in products){
+                    string line = archive.ReadLine();
+                    if(nameOrCode == product.Name || nameOrCode == product.Code){
+                        products.Remove(product);
+                        System.Console.WriteLine($"\nProduct {product.Name}, Code {product.Code} removed");
+                        exist = true;
+                    }
+                    else{
+                        text.AppendLine(line);
+                    }
+                }
+                if(exist == false) throw new StockException("! - Not exist a product with this information");
+                using(StreamWriter newArchive = new StreamWriter("BD_Products")){
+                    newArchive.Write(text);
                 }
             }
-            if(exist == false) throw new StockException("\n! - Not exist a product with this information");
         }
 
         public string nameOrCode(){
@@ -99,6 +120,15 @@ namespace Atividade_VI.Entities
 
         public void isEmpty(){ //Method to verify if exist product is the stock
             if(products.Count == 0) throw new StockException("! - The stock is empty");
+        }
+
+        public void archive(){ //Inacabado
+            using(StreamReader sr = new StreamReader("BD_Products")){
+                string line;
+                while((line = sr.ReadLine()) != null){
+                    string[] vect = line.Split(";");
+                }
+            }
         }
 
     }
